@@ -1,5 +1,6 @@
-/*global chrome, XMLHttpRequest, requirejs, server*/
+/*global window, chrome, XMLHttpRequest, requirejs, server*/
 /*jslint indent: 4 */
+/*jshint strict: false*/
 
 var currentRequest = null;
 var periodTime = 0;
@@ -24,32 +25,30 @@ requirejs.config({
     },
     shim: {
         "jquery": {"exports": "jquery"},
-        "bootstrap": {deps:["jquery"]}
+        "bootstrap": {deps: ["jquery"]}
     }
 });
 
-// TODO: should keep the version in some place
+// should keep the version in some place
 requirejs(['jquery',
           'underscore',
           'backbone'],
           function ($) {
-              $.ajax({
-                  type: "POST",
-                  url: server,
-                  data: {'acc': 12345, 'pwd': 12345}
-              }).done(function (msg) {
-                  console.log(msg);
-              });
-}
-);
-(function(window) {
-
-    var musicInstant = function () {
-        /*
-        _.extend(options, {
-            countIdx: 0
+        'use strict';
+        $.ajax({
+            type: "POST",
+            url: server,
+            data: {'acc': 12345, 'pwd': 12345}
+        }).done(function (msg) {
+            console.log(msg);
         });
-        */
+    }
+    );
+(function (window) {
+
+    'use strict';
+    var musicInstant = function () {
+        return;
     };
 
     musicInstant.prototype = {
@@ -60,8 +59,9 @@ requirejs(['jquery',
             });
         },
         search: function (query, callback) {
-            var url = server + "?action=chr_query&keyword=" + query;
-            var req = new XMLHttpRequest();
+            var url, req;
+            url = server + "?action=chr_query&keyword=" + query;
+            req = new XMLHttpRequest();
             req.open('GET', url, true);
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
@@ -78,17 +78,20 @@ requirejs(['jquery',
             });
         },
         reconnect: function () {
+            // connect issue
+            console.log('later on we try to reconnect to server');
         }
     };
 
     window.MusicInstant = musicInstant;
-})(window);
+}(window));
 
-var mi = new MusicInstant();
+var mi = new window.MusicInstant();
 mi.resetDefaultSuggestion();
 chrome.omnibox.onInputChanged.addListener(
     function (text, suggest) {
 
+        'use strict';
         date = new Date();
 
         // reset the request
@@ -110,12 +113,10 @@ chrome.omnibox.onInputChanged.addListener(
 
             // request for search only in 2 seconds delay
             currentRequest = mi.search(text, function (json) {
-                var data = JSON.parse(json);
-                var suggestions = [];
-                var idx = 0;
+                var data = JSON.parse(json), suggestions = [], idx = 0;
 
                 // parse the result
-                for (idx = 0; idx < data.length && idx < 10; idx++) {
+                for (idx = 0; idx < data.length && idx < 10; idx += 1) {
                     suggestions.push({content: (idx + 1) + ' ', description: data[idx].song_name});
                 }
                 suggest(suggestions);
@@ -126,17 +127,20 @@ chrome.omnibox.onInputChanged.addListener(
 );
 
 // accept the url/music link
-chrome.omnibox.onInputEntered.addListener(function (url, tab) {
+chrome.omnibox.onInputEntered.addListener(function (url) {
+    'use strict';
     chrome.tabs.query({active: true, currentWindow: true}, function (tab) {
-        chrome.tabs.update(tabs[0].id, {url: url});
+        chrome.tabs.update(tab[0].id, {url: url});
     });
 });
 chrome.omnibox.onInputStarted.addListener(function () {
+    'use strict';
     periodTime = date.getSeconds();
     mi.updateDefaultSuggestion('select the music to play');
 });
 
 chrome.omnibox.onInputCancelled.addListener(function () {
+    'use strict';
     mi.resetDefaultSuggestion();
 });
 
