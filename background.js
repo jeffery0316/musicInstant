@@ -32,7 +32,14 @@ requirejs.config({
 requirejs(['jquery',
           'underscore',
           'backbone'],
-          function ($, _, back) {
+          function ($) {
+              $.ajax({
+                  type: "POST",
+                  url: server,
+                  data: {'acc': 12345, 'pwd': 12345}
+              }).done(function (msg) {
+                  console.log(msg);
+              });
 }
 );
 (function(window) {
@@ -120,10 +127,8 @@ chrome.omnibox.onInputChanged.addListener(
 
 // accept the url/music link
 chrome.omnibox.onInputEntered.addListener(function (url, tab) {
-    window.alert(url);
-    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tab) {
         chrome.tabs.update(tabs[0].id, {url: url});
-        console.log(tabs);
     });
 });
 chrome.omnibox.onInputStarted.addListener(function () {
