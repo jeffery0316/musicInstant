@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+
+    <title>KKBOX extension player</title>
+    <style>
+      body {
+        min-width: 357px;
+        overflow-x: hidden;
+      }
+
+      img {
+        margin: 5px;
+        border: 2px solid black;
+        vertical-align: middle;
+        width: 200px;
+        height: 100px;
+      }
+    </style>
+    <script data-main="js/app.js" src="./js/require.js"></script>
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+     -->
+    <!--<script src="./js/underscore.min.js"></script>
+    <script src="./js/backbone.min.js"></script>
+    <script src="./jquery-1.11.1.min.js"></script>-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+
+  </head>
+  <body>
+    <div>
+      <div class="form-group">
+        <label for="exampleInputEmail1"> KKBOX Login</label>
+          <!--
+          <input type="account" class="form-control" id="acc" style="padding: 5px;line-height: 5px;width: 40px; font-size: 10px;" placeholder="Account">
+          <input type="password" class="form-control" id="pwd" style="width: 40px;"  placeholder="Password">
+          -->
+          <div class="login_dialog">
+            <input type="account"  id="acc" size="20" placeholder="Account">
+          </div>
+          <div class="login_dialog">
+            <input type="password" id="pwd" size="20" placeholder="Password">
+          </div>
+          <div class="login_dialog">
+            <button id="login">登入</button>
+          </div>
+      </div>
+    </div>
+    <div><span id="backward" class="glyphicon glyphicon-backward"></span>
+      <span id="play" class="glyphicon glyphicon-play"></span>
+      <span id="forward" class="glyphicon glyphicon-forward"></span><br/>
+    </div>
+  </body>
+</html>
+
