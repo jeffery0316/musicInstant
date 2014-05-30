@@ -21,7 +21,8 @@ requirejs(['jquery',
           'bootstrap', 
           'underscore', 
           'backbone', 
-          'app/popup'],
-          function ($, bootstrap, popup) {
+          'app/popup',
+          'app/url'],
+          function ($, bootstrap, popup, url) {
           }
 );
