@@ -1,0 +1,9 @@
+{
+  "name": "musicInstant",
+  "version": "0.0.1",
+  "dependencies": {
+  },
+  "scripts": { 
+      "test": "jslint background.js js/app/popup.js"
+  }
+}
