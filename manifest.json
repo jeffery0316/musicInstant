@@ -6,8 +6,8 @@
     "description": "play kkbox and spotify in chrome extension, and type 'kkb' in search bar will show special item",
     "version": "1.0",
     "background": {
-      "scripts": ["js/lib/jquery.js", "js/app/url.js", "js/require.js", "background.js"],
-      "persistent": true
+      "persistent": true,
+      "page": "background.html"
     },
     "omnibox": { "keyword" : "kk"},
     "browser_action": {

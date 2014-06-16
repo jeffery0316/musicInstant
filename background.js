@@ -2,7 +2,6 @@
 /*jslint indent: 4 */
 
 (function (window, $) {
-
     'use strict';
     var musicInstant = function () {
         return;
@@ -26,7 +25,6 @@
 
                 return function () {
                     if (req.readyState === 4) {
-
                         try {
                             var jsonData = JSON.parse(req.responseText);
                             if (jsonData.status === -1) {
@@ -65,7 +63,7 @@
     window.MusicInstant = musicInstant;
 }(window, $));
 
-(function (window) {
+(function (window, $) {
     'use strict';
     var currentRequest = null,
         callbacks = [],
@@ -120,7 +118,7 @@
                 return;
             }
 
-            mi.updateDefaultSuggestion('select music data');
+            mi.updateDefaultSuggestion('select music...');
 
             // trigger to search after type 'space'
             if (text.indexOf(' ') !== (text.length - 1) || (text.length <= 0)) {
@@ -131,8 +129,12 @@
                 currentRequest = mi.search(text, function (json) {
                     var data = JSON.parse(json), suggestions = [], idx = 0;
 
+
                     // parse the result
                     for (idx = 0; idx < data.length && idx < 10; idx += 1) {
+                        // save to localStorage
+                        window.localStorage.setItem((idx + 1), data[idx].song_link);
+
                         suggestions.push({content: (idx + 1) + ' ', description: data[idx].song_name});
                     }
                     suggest(suggestions);
@@ -143,15 +145,24 @@
 
     // accept the url/music link
     chrome.omnibox.onInputEntered.addListener(function (url) {
-        window.alert(url);
+        var link = window.localStorage.getItem(url.trim());
+        $('#player').jPlayer({
+            ready: function () {
+                $(this).jPlayer("setMedia", {
+                    mp3: link
+                }).jPlayer('play');
+            },
+            supplied: "mp3",
+            swfPath: "js/lib/jplayer"
+        });
+        console.log('play');
+
         chrome.tabs.query({active: true, currentWindow: true}, function (tab) {
             chrome.tabs.update(tab[0].id, {url: url});
             chrome.extension.sendMessage({song: tab[0].id}, function (response) {
-                window.music = 1;
+                window.music = tab[0].id;
                 console.log(response);
-                //window.song = tab[0].id;
             });
-
         });
     });
 
@@ -169,4 +180,4 @@
     });
 
     mi.resetDefaultSuggestion();
-}(window));
+}(window, $));
