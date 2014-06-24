@@ -1,24 +1,29 @@
-
 {
-  "manifest_version": 2,
-
+    "manifest_version": 2,
     "name": "music player",
     "description": "play kkbox and spotify in chrome extension, and type 'kkb' in search bar will show special item",
     "version": "1.0",
     "background": {
       "persistent": true,
-      "page": "background.html"
+      "page": "public/html/background.html"
     },
     "omnibox": { "keyword" : "kk"},
     "browser_action": {
-      "default_icon": "icon.png",
-      "default_popup": "popup.html"
+      "default_icon": "public/img/icon.png",
+      "default_popup": "public/html/popup.html"
     },
     "permissions": [
       "http://*/",
       "tabs",
-      "activeTab"
+      "activeTab",
+      "notifications"
     ],
-    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+    "web_accessible_resources": [
+      "public/img/icon.png"
+    ],
+    "icons": {
+      "16": "public/img/icon.png"
+    }
 }
 

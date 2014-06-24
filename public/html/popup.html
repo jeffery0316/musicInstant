@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+
+    <title>KKBOX extension player</title>
+    <style>
+      body {
+        min-width: 357px;
+        overflow-x: hidden;
+        width: 550px;
+      }
+
+      img {
+        /*margin: 5px;
+        border: 2px solid black;
+        vertical-align: middle;
+        width: 200px;
+        height: 100px;
+        */
+      }
+    </style>
+    <script data-main="../js/app.js" src="../js/require.js"></script>
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+     -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Rufina' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>-->
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/profile.css">
+
+  </head>
+  <body>
+    <div>
+      <div class="form-group">
+        <label for="exampleInputEmail1"> Music Instant</label>
+          <!--
+          <input type="account" class="form-control" id="acc" style="padding: 5px;line-height: 5px;width: 40px; font-size: 10px;" placeholder="Account">
+          <input type="password" class="form-control" id="pwd" style="width: 40px;"  placeholder="Password">
+          -->
+          <div class="login_dialog">
+            <input type="account"  id="acc" size="20" placeholder="Account">
+          </div>
+          <div class="login_dialog">
+            <input type="password" id="pwd" size="20" placeholder="Password">
+          </div>
+          <div class="login_dialog">
+            <button id="login">登入</button>
+          </div>
+      </div>
+    </div>
+    <div id="popup">
+      <div class="player">
+        <div id="artist_name" class="artist-name">Artist</div>
+        <div class="album-photo"><img id="album" src=""/></div>
+        <div class="album-name" id="album_name"></div>
+        <div class="player-button">
+          <span id="backward" class="glyphicon glyphicon-backward"></span>
+          <span id="play" class="glyphicon glyphicon-play"></span>
+          <span id="stop" class="glyphicon glyphicon-stop"></span>
+          <span id="forward" class="glyphicon glyphicon-forward"></span>
+          <span id="add" class="glyphicon glyphicon-plus"></span>
+          <span id="lyric" class="glyphicon glyphicon-align-justify"></span>
+        </div>
+        <span class="play-bar" id="play-bar">
+        </span>
+      </div>
+      <div class="vertical-line"></div>
+      <div class="profile">
+        <div class="head-pic" style="float: left;"> 
+        </div>
+        <div>Name</div>
+        <div>Status</div>
+        <p id="viewPlaylist" class="list">
+            Try add some song into list... 
+        </p>
+      </div>
+      <div class="plugin">
+        
+      </div>
+    </div>
+  </body>
+</html>
+

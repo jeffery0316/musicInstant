@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato/Lato-Black.ttf');
+}
+
+* {
+    font-family: 'Lato', sans-serif, 'LiHei Pro', 'Microsoft JhengHei', '新細明體';
+}
+
+#popup {
+    /*
+    border-width: 1px;
+    border-style: solid;
+    */
+    height: 310px;
+}
+
+.profile, .vertical-line, .player {
+    height: 100%;
+    float: left;
+    position: relative;
+}
+
+.vertical-line {
+    border-right: solid 1px black;
+    top: 5px;
+    height: 290px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.head-pic {
+    background-image: url('../img/avatar.png');
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    /*border-width: 1px; 
+    border-style: solid;*/
+    margin: 10px;
+}
+
+.profile {
+    width: 250px;
+    height: 250px;
+    /*border-width: 1px;
+    border-style: solid;
+    */
+}
+
+.player {
+    width: 250px;
+    height: 300px;
+    /*border-width: 1px;
+    border-style: solid;
+    */
+}
+
+.plugin {
+    width: 250px; 
+    height: 50px;
+    border-width: 1px;
+    border-style: solid;
+    float: left;
+    margin-top: 1px;
+}
+.album-photo {
+    /*border-width: 1px;
+    border-style: solid;
+    border-color: #0088a7;
+    */
+    border: 1px solid #ddd;
+    height: 152px;
+    width: 152px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.player-button {
+    text-align: center;
+    /*margin-left: 50px;*/
+}
+
+.artist-name, .album-name {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.list {
+    clear: both;
+    margin-top: 75px;
+    text-align: center;
+    text-shadow: 2px 2px 3px gray;
+}
+
+#forward, #play, #stop, #backward, #add {
+    transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    -webkit-transform: scale(1.2, 1.2);
+    margin: 3px;
+    cursor: pointer;
+}
+
+#forward:active, #play:active, #stop:active, #backward:active, #add:active {
+    box-shadow: 2px 2px 1px rgba(20%,20%,40%,0.5);
+}
